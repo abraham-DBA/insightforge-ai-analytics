@@ -24,7 +24,7 @@ const Hero = () => {
                         </span>
 
                 </h1>
-                <p className="text-lg md:text-xl text-zinc-400 font-light mb-10 max-2xl mx-auto leading-relaxed">
+                <p className="text-lg md:text-xl text-zinc-400 font-light mb-10 max-w-2xl mx-auto leading-relaxed">
                     Resolve questions instantly with an assistant grounded in your data — clear answers, real understanding, no robotic replies.
                 </p>
 
