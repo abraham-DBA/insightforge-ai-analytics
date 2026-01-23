@@ -41,7 +41,7 @@ const Integration = () => {
                             <div className="flex gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-500/20 border-red-500/50"></div>
                                 <div className="w-3 h-3 rounded-full bg-yellow-500/20 border-yellow-500/50"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500/20 border-green-500/500"></div>
+                                <div className="w-3 h-3 rounded-full bg-green-500/20 border-green-500/50"></div>
                             </div>
                             <span className="text-xs text-zinc-600 font-mono">
                                 index.html
@@ -49,7 +49,7 @@ const Integration = () => {
                         </div>
                         <div className="font-mono text-xs md:text-sm leading-7 text-zinc-400">
                             <div className="text-zinc-600">
-                                &alt;!-- InsightForge --&gt;
+                                &lt;!-- InsightForge --&gt;
                             </div>
                             <div>
                                 &lt;<span className="text-pink-400">script</span>
