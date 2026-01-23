@@ -29,18 +29,17 @@ const Hero = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-                    <button className="h-11 px-8 cursor-pointer rounded-full bg-white text-black text-sm font-medium hover:bg-zinc-200 transition-all flex items-center gap-2">
+                    <button type="button" className="h-11 px-8 cursor-pointer rounded-full bg-white text-black text-sm font-medium hover:bg-zinc-200 transition-all flex items-center gap-2">
                         Start for free
                         <ArrowRight className="w-4 h-4" />
                     </button>
 
-                    <button className="h-11 px-8 rounded-full border border-zinc-800 text-zinc-300 text-sm font-medium hover:border-zinc-600 hover:text-white transition-all bg-black/20 backdrop-blur-sm">
-                        View Demo
+                    <button type="button" className="h-11 px-8 rounded-full border border-zinc-800 text-zinc-300 text-sm font-medium hover:border-zinc-600 hover:text-white transition-all bg-black/20 backdrop-blur-sm">                        View Demo
                     </button>
                 </div>
             </div>
 
-            {/*floating chat vistualization*/}
+            {/*floating chat visualization*/}
             <div className="max-w-3xl mx-auto relative z-10">
               <div className="absolute inset-0 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
               <div className="rounded-2xl p-1 md:p-2 relative overflow-visible ring-1 ring-white/10 bg-[#0a0a0e] shadow-2xl">
@@ -112,8 +111,7 @@ const Hero = () => {
                     <div className="relative">
                       <div className="min-h-[50px] w-full px-4 py-3 text-sm bg-zinc-900/50 border border-white/10 rounded-xl text-zinc-500 flex items-center justify-between">
                         <span>Type a message...</span>
-                        <button className="h-8 w-8 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-500 cursor-default">
-                          <Send className="w-4 h-4" />
+                          <button type="button" aria-label="Send message" disabled className="h-8 w-8 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-500 cursor-default">                          <Send className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
