@@ -1,0 +1,61 @@
+import React from 'react';
+import {BookOpen, Database, ShieldCheck} from "lucide-react";
+
+const Features = () => {
+    return (
+        <section id="features" className="py-32 px-6 max-w-6xl mx-auto">
+            <div className="mb-20">
+                <h2 className="text-3xl md:text-5xl font-medium text-white tracking-tight mb-6">
+                    Designed for trust
+                </h2>
+                <p className="text-xl text-zinc-500 font-light max-w-xl leading-relaxed">
+                    Most AI tools generate answers without context. InsightForge is grounded in your data and documentation, with behavior and tone fully under your control.
+                </p>
+            </div>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                {/*feature #1*/}
+                <div className="group p-8 rounded-3xl border border-white/5 bg-linear-to-b from-white/3 to-transparent hover:border-white/10 transition-colors">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0A0A0E] border border-white/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
+                        <BookOpen className="w-6 h-6 text-zinc-300" />
+                    </div>
+                    <h3 className="text-lg font-medium text-white mb-3">
+                        Structured Knowledge
+                    </h3>
+                    <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                        InsightForge ingests your documentation and content to build structured, queryable knowledge models—no manual training or prompt tuning required.
+                    </p>
+                </div>
+
+                {/*feature #2*/}
+                <div className="group p-8 rounded-3xl border border-white/5 bg-linear-to-b from-white/3 to-transparent hover:border-white/10 transition-colors">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0A0A0E] border border-white/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
+                        <Database className="w-6 h-6 text-zinc-300" />
+                    </div>
+                    <h3 className="text-lg font-medium text-white mb-3">
+                        Data-Grounded Answers
+                    </h3>
+                    <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                        Every response is generated from verified warehouse data and approved content, ensuring accuracy, traceability, and consistency across teams.
+                    </p>
+                </div>
+
+                {/*feature #2*/}
+                <div className="group p-8 rounded-3xl border border-white/5 bg-linear-to-b from-white/3 to-transparent hover:border-white/10 transition-colors">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0A0A0E] border border-white/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
+                        <ShieldCheck className="w-6 h-6 text-zinc-300" />
+                    </div>
+                    <h3 className="text-lg font-medium text-white mb-3">
+                        Governance & Access Control
+                    </h3>
+                    <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                        Define who can ask questions, what data can be accessed, and how insights are shared—built with role-based access and enterprise-grade security.
+                    </p>
+                </div>
+
+
+            </div>
+        </section>
+    );
+};
+
+export default Features;
