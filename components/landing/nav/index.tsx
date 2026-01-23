@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from "next/dist/client/link";
+import Link from "next/link";
 
 const Navbar = () => {
     return (
@@ -21,7 +21,7 @@ const Navbar = () => {
                     <Link href="/#features" className="hover:text-white transition-colors">
                         Features
                     </Link>
-                    <Link href="/#fhow-it-works" className="hover:text-white transition-colors">
+                    <Link href="/#how-it-works" className="hover:text-white transition-colors">
                         Integration
                     </Link>
                     <Link href="/#pricing" className="hover:text-white transition-colors">
@@ -43,7 +43,6 @@ const Navbar = () => {
                     </Link>
                 </div>
             </div>
-            
         </nav>
     );
 };
