@@ -8,11 +8,12 @@ const SocialProof = () => {
                     Trusted by data-driven teams
                 </p>
                 <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale">
-                    <span className="text-lg font-bold tracking-tighttext-white">
+                    <span className="text-lg font-bold tracking-tight text-white">
                         ICEA
                     </span>
                     <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1">
-                        <div className="w-4 h-4 bg-white rounded-full"></div> Sphere
+                        <span className="w-4 h-4 bg-white rounded-full inline-block" aria-hidden="true"></span>
+                        <span>Sphere</span>
                     </span>
                     <span className="text-lg font-semibold tracking-tight text-white">
                         NEXUS
