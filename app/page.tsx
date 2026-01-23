@@ -3,6 +3,7 @@ import Navbar from "@/components/landing/nav";
 import Hero from "@/components/landing/hero";
 import SocialProof from "@/components/landing/social";
 import Features from "@/components/landing/features";
+import Integration from "@/components/landing/integration";
 
 const Page = () => {
     return (
@@ -11,6 +12,7 @@ const Page = () => {
             <Hero />
             <SocialProof />
             <Features />
+            <Integration />
         </main>
     );
 };
