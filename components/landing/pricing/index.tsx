@@ -34,8 +34,7 @@ const Pricing = () => {
                     </button>
 
                 </div>
-                <div className="p-8 relative overflow-hidden rounded-3xl border border-white/10 bg-white/3 flex flex-col items-start text-left hover:bg-zinc-900/40 transition-colors">
-                    <div className="absolute top-0 right-0 px-4 py-1 bg-white/10 rounded-bl-xl ">
+                <div className="p-8 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 flex flex-col items-start text-left hover:bg-zinc-900/40 transition-colors">                    <div className="absolute top-0 right-0 px-4 py-1 bg-white/10 rounded-bl-xl ">
                         Popular
                     </div>
                     <div className="text-sm font-medium text-indigo-400 mb-2">
