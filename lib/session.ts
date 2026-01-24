@@ -49,7 +49,7 @@ export async function validateSession(sessionId: string) {
     return {
         userId: session.userId,
         email: session.userEmail,
-        organizationalId: session.organizationalId,
+        organizational_id: session.organizationalId,
         name: session.userName,
     };
 }
