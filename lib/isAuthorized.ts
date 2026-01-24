@@ -1,19 +1,20 @@
 "use server"
 import { cookies } from "next/headers";
+import { validateSession } from "@/lib/session";
 
-export  const isAuthorized = async () => {
+export const isAuthorized = async (): Promise<{ email: string; organizational_id: string } | null> => {
     const cookieStore = await cookies();
-    const userSession = cookieStore.get("user_session")
+    const sessionId = cookieStore.get("user_session")?.value;
 
-    let user = null;
+    if (!sessionId) {
+        return null;
+    }
 
-    if (userSession) {
-        try {
-            user = JSON.parse(userSession.value);
-        } catch (e) {
-            console.error("Failed to parse user session cookie:", e);
-        };
-    };
-
-    return user;
+    try {
+        const user = await validateSession(sessionId);
+        return user;
+    } catch (e) {
+        console.error("Failed to validate session:", e);
+        return null;
+    }
 }

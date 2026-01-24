@@ -12,6 +12,7 @@ export async function GET(): Promise<Response> {
       httpOnly: true,
       sameSite: "lax",
       path: "/",
+      secure: process.env.NODE_ENV === "production",
     })
 
     const redirectUrl = process.env.SCALEKIT_REDIRECT_URL

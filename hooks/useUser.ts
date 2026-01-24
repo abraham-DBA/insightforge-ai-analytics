@@ -17,6 +17,7 @@ export const useUser = () => {
             }
             setLoading(false);
         }
+        fetchUser();
     }, []);
 
     return {email, loading};

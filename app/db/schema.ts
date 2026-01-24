@@ -8,5 +8,12 @@ export const user = pgTable("user", {
     email: text("email").notNull().unique(),
     image: text("image"),
     created_at: text("created_at").default(sql`now()`),
+})
 
+export const session = pgTable("session", {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    organizationalId: text("organizational_id").notNull(),
+    expiresAt: text("expires_at").notNull(),
+    createdAt: text("created_at").default(sql`now()`),
 })
