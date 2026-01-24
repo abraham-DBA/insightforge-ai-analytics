@@ -5,6 +5,7 @@ import SocialProof from "@/components/landing/social";
 import Features from "@/components/landing/features";
 import Integration from "@/components/landing/integration";
 import Pricing from "@/components/landing/pricing";
+import Footer from "@/components/landing/footer";
 
 const Page = () => {
     return (
@@ -15,6 +16,7 @@ const Page = () => {
             <Features />
             <Integration />
             <Pricing />
+            <Footer />
         </main>
     );
 };
