@@ -72,7 +72,7 @@
      }, [currentStep]);
 
      const handleNext = () => {
-         if (isSubmitting) return;
+         if (isSubmitting || isAnimating) return;
          const currentField = STEPS[currentStep].field;
          const value = (formData[currentField] ?? "").toString();
 
@@ -91,6 +91,7 @@
      };
 
      const handleBack = () => {
+         if (isAnimating) return;
          if (currentStep > 0) {
              setIsAnimating(true);
              setTimeout(() => {
@@ -245,7 +246,7 @@
                                      </div>
                                      <Button
                                          onClick={handleNext}
-                                         disabled={!isStepValid}
+                                         disabled={!isStepValid || isAnimating}
                                          className={cn(
                                              "rounded-full px-8 py-6 text-base font-medium transition-all duration-300",
                                              !isStepValid
