@@ -115,20 +115,27 @@
      };
 
      const handleSubmit = async () => {
-         const response = await fetch("/api/metadata/store", {
-             method: "POST",
-             headers: {
+         setIsSubmitting(true);
+         try {
+             const response = await fetch("/api/metadata/store", {
+                 method: "POST",
+                 headers: {
                  "Content-Type": "application/json"
-             },
+                 },
              body: JSON.stringify({
                  business_name: formData.businessName,
                  website_url: formData.websiteURL,
                  external_links: formData.externalLinks,
-             }),
-         });
-         await response.json();
-         setIsSubmitting(false);
-         window.location.reload();
+                 }),
+             });
+                 if (!response.ok) {
+                     return;
+                 }
+                 await response.json();
+             window.location.reload();
+             } finally {
+             setIsSubmitting(false);
+             }
      };
 
      const currentValue = (formData[stepData.field] ?? "").toString();

@@ -20,14 +20,19 @@ export async function GET(request: Request) {
         const metaDataCookie = cookieStore.get("metadata")
 
         if(metaDataCookie?.value) {
+            try {
+                const parsedData = JSON.parse(metaDataCookie.value);
             return NextResponse.json(
                 {
                     exists: true,
                     source: "cookie",
-                    data: JSON.parse(metaDataCookie.value),
+                    data: parsedData,
                 },
                 {status: 200}
             );
+                } catch {
+                // Invalid cookie data, fall through to database query
+            }
         }
 
         const [record] = await db
@@ -38,12 +43,13 @@ export async function GET(request: Request) {
         if(record) {
             cookieStore.set(
                 "metadata",
-                JSON.stringify({businessName: record.business_name}),
+                JSON.stringify(record),
                 {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                     maxAge: 60 * 60 * 24 * 30, // 30 days
-                    path: "/"
+                    path: "/",
+                    sameSite: "lax"
                 }
             );
             return NextResponse.json(

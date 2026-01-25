@@ -9,10 +9,19 @@ const Page = () => {
 
     useEffect(() => {
         const fetchMetadata = async () => {
-            const response = await fetch("/api/metadata/fetch");
-            const data = await response.json();
-            setIsMetaDataAvailable(data.exists)
-            setIsLoading(false);
+            try {
+                const response = await fetch("/api/metadata/fetch");
+                if (!response.ok) {
+                    setIsMetaDataAvailable(false);
+                    return;
+                    }
+                const data = await response.json();
+                setIsMetaDataAvailable(Boolean(data?.exists));
+                } catch {
+                setIsMetaDataAvailable(false);
+                } finally {
+                setIsLoading(false);
+            }
         };
         fetchMetadata();
     }, []);
