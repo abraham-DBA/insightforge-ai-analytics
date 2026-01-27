@@ -87,8 +87,10 @@ const Sidebar = () => {
                     <div className="flex flex-col overflow-hidden">
             <span className="text-sm font-medium text-zinc-300 truncate group-hover:text-white">
               {isLoading
-                  ? "Loading..."
-                  : `${metadata?.business_name}'s Workspace`}
+            ? "Loading..."
+                  : metadata?.business_name
+                     ? `${metadata.business_name}'s Workspace`
+                : "Workspace"}
             </span>
                         <span className="text-xs text-zinc-400 truncate">{email}</span>
                     </div>
