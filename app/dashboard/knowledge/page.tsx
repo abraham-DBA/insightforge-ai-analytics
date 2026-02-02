@@ -45,6 +45,7 @@ const Page = () => {
             if(!response.ok) throw new Error("Failed to store knowledge");
 
             const res = await fetch("/api/knowledge/fetch");
+            if (!res.ok) throw new Error("Failed to refresh knowledge sources");
             const newData = await res.json();
             setKnowledgeSources(newData.sources);
             setIsAddOpen(false);

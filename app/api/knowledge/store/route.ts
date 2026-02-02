@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
                 const markdown = await summarizeMarkdown(fileContent);
                 formattedContent = markdown;
 
+                const rowCount = Math.max(0, lines.length - 1);
                 await db.insert(knowledge_source).values({
                     user_email: user.email,
                     type: "upload",
@@ -45,8 +46,8 @@ export async function POST(req: NextRequest) {
                     metadata: JSON.stringify({
                         fileName: file.name,
                         fileSize: file.size,
-                        rowCount: lines.length - 1,
-                        headers: headers
+                        rowCount,
+                        headers: headers ?? []
                     })
                 });
                 return NextResponse.json(
@@ -91,30 +92,43 @@ export async function POST(req: NextRequest) {
                     "User-Agent": "InsightForgebot/1.0"
                 }
             });
-            const html = await res.text();
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 15_000);
+            try {
+                const res = await fetch(zenUrl.toString(), {
+                    headers: {
+                    "User-Agent": "InsightForgebot/1.0"
+                    },
+                signal: controller.signal
+                });
+                const html = await res.text();
 
-            if(!res.ok){
-                return NextResponse.json(
-                    {
+                    if(!res.ok){
+                    return NextResponse.json(
+                        {
                         error: "Zenrows request failed",
                         status: res.status,
                         body: html.slice(0, 500)
 
                     },
                     {status: 502}
-                )
-            }
+                    )
+                    }
 
-            const markdown = await summarizeMarkdown(html);
+                    const markdown = await summarizeMarkdown(html);
 
-            await db.insert(knowledge_source).values({
-                user_email: user.email,
-                type: "website",
-                name: body.url,
-                status: "active",
-                source_url: body.url,
-                content: markdown,
-            })
+                    await db.insert(knowledge_source).values({
+                        user_email: user.email,
+                    type: "website",
+                    name: body.url,
+                    status: "active",
+                    source_url: body.url,
+                    content: markdown,
+                    })
+                } finally {
+                clearTimeout(timeout);
+                }
+
         } else if(type === "text") {
             if (!body.content || !body.title) {
                 return NextResponse.json(
