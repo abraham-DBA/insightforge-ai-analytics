@@ -1,10 +1,6 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-
-const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-});
+const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 
 // -----------------------------
@@ -34,10 +30,12 @@ INPUT:
 ${markdown}
 `;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
+        const result = await genAI.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: [{ parts: [{ text: prompt }] }]
+        });
 
-        return response.text().trim();
+        return result.text?.trim() || "";
     } catch (error) {
         console.error("Error in summarizeMarkdown:", error);
         throw error;
@@ -60,10 +58,12 @@ Summarize the following conversation history into a concise paragraph, preservin
 ${conversationText}
 `;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
+        const result = await genAI.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: [{ parts: [{ text: prompt }] }]
+        });
 
-        return response.text().trim();
+        return result.text?.trim() || "";
     } catch (error) {
         console.error("Error in summarizeConversation:", error);
         throw error;

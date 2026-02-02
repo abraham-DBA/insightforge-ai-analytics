@@ -59,9 +59,30 @@ export async function POST(req: NextRequest) {
             type = body.type;
         }
 
+        if (!["upload", "website", "text"].includes(type)) {
+            return NextResponse.json(
+                { error: "Invalid type. Must be 'upload', 'website', or 'text'" },
+                { status: 400 }
+                );
+            }
+
         if(type === "website"){
+            if (!body.url) {
+                return NextResponse.json(
+                    { error: "URL is required for website type" },
+                    { status: 400 }
+                    );
+                }
             const zenUrl = new URL("https://api.zenrows.com/v1/");
-            zenUrl.searchParams.set("apikey", process.env.ZENROWS_API_KEY!);
+            const apiKey = process.env.ZENROWS_API_KEY;
+            if (!apiKey) {
+                console.error("ZENROWS_API_KEY is not configured");
+                return NextResponse.json(
+                    { error: "Internal Server Error" },
+                    { status: 500 }
+                    );
+                }
+            zenUrl.searchParams.set("apikey", apiKey);
             zenUrl.searchParams.set("url", body.url);
             zenUrl.searchParams.set("response_type", "markdown");
 
@@ -72,7 +93,7 @@ export async function POST(req: NextRequest) {
             });
             const html = await res.text();
 
-            if(!res.text){
+            if(!res.ok){
                 return NextResponse.json(
                     {
                         error: "Zenrows request failed",
@@ -95,6 +116,12 @@ export async function POST(req: NextRequest) {
                 content: markdown,
             })
         } else if(type === "text") {
+            if (!body.content || !body.title) {
+                return NextResponse.json(
+                    { error: "Content and title are required for text type" },
+                    { status: 400 }
+                    );
+                }
             let content = body.content;
 
             if(body.content.length > 500) {

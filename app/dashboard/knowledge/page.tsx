@@ -52,7 +52,7 @@ const Page = () => {
         } catch (error) {
             console.error(error);
         } finally {
-            setKnowledgeSourcesLoader(false);
+            setKnowledgeStoringLoader(false);
         }
     }
     return (
