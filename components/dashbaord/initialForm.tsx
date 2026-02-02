@@ -72,7 +72,7 @@ const InitialForm = () => {
     }, [currentStep]);
 
     const handleNext = () => {
-        if (isSubmitting) return;
+        if (isSubmitting || isAnimating) return;
         const currentField = STEPS[currentStep].field;
         const value = formData[currentField];
 
@@ -90,7 +90,7 @@ const InitialForm = () => {
     };
 
     const handleBack = () => {
-        // if (isAnimating) return;
+        if (isAnimating) return;
         if (currentStep > 0) {
             setIsAnimating(true);
             setTimeout(() => {
@@ -116,20 +116,24 @@ const InitialForm = () => {
 
     const handleSubmit = async () => {
         setIsSubmitting(true);
+        try {
             const response = await fetch("/api/metadata/store", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    business_name: formData.businessName,
-                    website_url: formData.websiteURL,
-                    external_links: formData.externalLinks,
+                headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                business_name: formData.businessName,
+                website_url: formData.websiteURL,
+                external_links: formData.externalLinks,
                 }),
             });
+            if (!response.ok) throw new Error("Failed to store metadata");
             await response.json();
+            window.location.reload();
+            } catch (err) {
+            console.error(err);
+            } finally {
             setIsSubmitting(false);
-            window.location.reload()
+            }
     };
 
     const isStepValid = currentStep >= 2 || (formData[stepData.field] && formData[stepData.field].trim() !== "");
@@ -151,7 +155,7 @@ const InitialForm = () => {
                             <div className="flex flex-col items-center justify-center text-center animate-in fade-in fade-out duration-700">
                                 <div className="relative mb-8">
                                     <div className="absolute inset-0 bg-indigo-500/20 blur-xl rounded-full animate-pulse">
-                                        <div className="relative w-16 h-16 bg-linear-to-tr from text-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                                        <div className="relative w-16 h-16 bg-linear-to-tr from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
                                             <Sparkles className="w-8 h-8 text-white animate-bounce" />
                                         </div>
                                     </div>
@@ -207,7 +211,7 @@ const InitialForm = () => {
                                                 }))}
                                                 onKeyDown={handleKeyDown}
                                                 placeholder={stepData.placeholder}
-                                                className="width-full bg-transparent border-0 border-b border-white/10 text-xl md:text-2xl py-4 text-white placeholder:text-zinc-700 focus:ring-0 focus:border-indigo-500 rounded-none resize-none shadow-none transition-colors"
+                                                className="w-full bg-transparent border-0 border-b border-white/10 text-xl md:text-2xl py-4 text-white placeholder:text-zinc-700 focus:ring-0 focus:border-indigo-500 rounded-none resize-none shadow-none transition-colors"
                                                 autoFocus
                                             />
                                         ) : (
@@ -221,7 +225,7 @@ const InitialForm = () => {
                                                 }))}
                                                 onKeyDown={handleKeyDown}
                                                 placeholder={stepData.placeholder}
-                                                className="width-full bg-transparent border-0 border-b border-white/10 text-xl md:text-2xl py-4 pr-12 text-white placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:border-indigo-500 rounded-none h-auto shadow-none transition-colors"
+                                                className="w-full bg-transparent border-0 border-b border-white/10 text-xl md:text-2xl py-4 pr-12 text-white placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:border-indigo-500 rounded-none h-auto shadow-none transition-colors"
                                                 autoFocus
                                             />
                                         )}

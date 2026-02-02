@@ -9,10 +9,16 @@ const Page = () => {
 
     useEffect(() => {
         const fetchMetadata = async () => {
-            const response = await fetch("/api/metadata/fetch");
-            const data = await response.json();
-            setIsMetaDataAvailable(data.exists)
-            setIsLoading(false)
+            try {
+                const response = await fetch("/api/metadata/fetch");
+                if (!response.ok) throw new Error("Failed to fetch metadata");
+                const data = await response.json();
+                setIsMetaDataAvailable(data.exists)
+                } catch (err) {
+                setIsMetaDataAvailable(false);
+                } finally {
+                setIsLoading(false);
+                }
         };
         fetchMetadata();
     }, []);
