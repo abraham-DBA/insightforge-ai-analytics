@@ -1,7 +1,7 @@
 "use client";
 
 import React, {useEffect, useState} from 'react';
-import InitialForm from "@/components/dashboard/initialForm";
+import InitialForm from "@/components/dashbaord/initialForm";
 
 const Page = () => {
     const [isMetaDataAvailable, setIsMetaDataAvailable] = useState(false);
@@ -11,28 +11,27 @@ const Page = () => {
         const fetchMetadata = async () => {
             try {
                 const response = await fetch("/api/metadata/fetch");
-                if (!response.ok) {
-                    setIsMetaDataAvailable(false);
-                    return;
-                    }
+                if (!response.ok) throw new Error("Failed to fetch metadata");
                 const data = await response.json();
-                setIsMetaDataAvailable(Boolean(data?.exists));
-                } catch {
+                setIsMetaDataAvailable(data.exists)
+                } catch (err) {
                 setIsMetaDataAvailable(false);
                 } finally {
                 setIsLoading(false);
-            }
+                }
         };
         fetchMetadata();
     }, []);
 
     if (isLoading) {
-        return <div className="flex-1 flex w-full items-center justify-center p-4"></div>;
+        return (
+            <div className="flex-1 flex w-full items-center justify-center p-4" />
+        )
     };
     return (
         <div className="flex-1 flex w-full">
             {!isMetaDataAvailable ? (
-                <div className="w-full flex items-center justify-center p-4 ">
+                <div className="w-full flex items-center justify-center p-4 min-h-screen">
                     <InitialForm />
                 </div>
             ) : (

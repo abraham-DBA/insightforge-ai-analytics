@@ -40,7 +40,7 @@ const Sidebar = () => {
     }, []);
 
     return (
-        <div className="w-64 h-screen fixed top-0 left-0 z-40 hidden md:flex flex-col bg-[#050509] border-r border-white/5 relative">
+        <div className="w-64 border-r border-white/5 bg-[#050509] flex-col h-screen fixed left-0 top-0 z-40 hidden md:flex">
             {/* Logo */}
             <div className="h-16 flex items-center px-6 border-b border-white/5">
                 <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ const Sidebar = () => {
             </nav>
 
             {/* Profile */}
-            <div className="flex-shrink-0 mt-auto border-t border-white/5 p-4">
+            <div className="shrink-0 mt-auto border-t border-white/5 p-4">
                 <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 cursor-pointer transition-colors group">
                     <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center border border-white/10">
             <span className="text-xs text-zinc-400 group-hover:text-white">
@@ -87,10 +87,10 @@ const Sidebar = () => {
                     <div className="flex flex-col overflow-hidden">
             <span className="text-sm font-medium text-zinc-300 truncate group-hover:text-white">
               {isLoading
-            ? "Loading..."
+                  ? "Loading..."
                   : metadata?.business_name
-                     ? `${metadata.business_name}'s Workspace`
-                : "Workspace"}
+                      ? `${metadata.business_name}'s Workspace`
+                      : "Workspace"}
             </span>
                         <span className="text-xs text-zinc-400 truncate">{email}</span>
                     </div>
