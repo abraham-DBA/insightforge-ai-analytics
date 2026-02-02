@@ -257,7 +257,7 @@ const AddKnowledgeModal = ({isOpen, setIsOpen, defaultTab, setDefaultTab, onImpo
                             </div>
 
                         </TabsContent>
-                        <div className="p-6 border-t border-white-5 bg-black/20 flex justify-end gap-2">
+                        <div className="p-6 border-t border-white/5 bg-black/20 flex justify-end gap-2">
                             <Button
                                 variant="ghost"
                                 onClick={() => setIsOpen(false)}

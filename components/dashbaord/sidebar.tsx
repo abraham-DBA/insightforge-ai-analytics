@@ -1,13 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import {
-    LayoutDashboard, Settings, BookOpen, Layers, Bot, MessageSquare,
+    BookOpen,
+    Bot,
+    Layers,
+    LayoutDashboard,
+    MessageSquare,
+    Settings,
 } from "lucide-react";
-import {cn} from "@/lib/utils";
-import {useUser} from "@/hooks/useUser";
-import {useEffect, useState} from "react";
+import { usePathname } from "next/dist/client/components/navigation";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { useUser } from "@/hooks/useUser";
 
 const SIDEBAR_ITEMS = [
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -18,7 +23,7 @@ const SIDEBAR_ITEMS = [
     { label: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
-export default function Sidebar() {
+const Sidebar = () => {
     const pathname = usePathname();
     const { email } = useUser();
     const [metadata, setMetadata] = useState<any>();
@@ -35,7 +40,7 @@ export default function Sidebar() {
     }, []);
 
     return (
-        <aside className="w-64 bg-[#050509] border-r hidden md:flex flex-col">
+        <div className="w-64 border-r border-white/5 bg-[#050509] flex-col h-screen fixed left-0 top-0 z-40 hidden md:flex">
             {/* Logo */}
             <div className="h-16 flex items-center px-6 border-b border-white/5">
                 <div className="flex items-center gap-2">
@@ -72,7 +77,7 @@ export default function Sidebar() {
             </nav>
 
             {/* Profile */}
-            <div className="flex-shrink-0 mt-auto border-t border-white/5 p-4">
+            <div className="shrink-0 mt-auto border-t border-white/5 p-4">
                 <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 cursor-pointer transition-colors group">
                     <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center border border-white/10">
             <span className="text-xs text-zinc-400 group-hover:text-white">
@@ -91,6 +96,8 @@ export default function Sidebar() {
                     </div>
                 </div>
             </div>
-        </aside>
+        </div>
     );
-}
+};
+
+export default Sidebar;

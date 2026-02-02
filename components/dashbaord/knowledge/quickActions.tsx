@@ -55,7 +55,7 @@ const QuickActions = ({onOpenModal} : {onOpenModal: (tab:string) => void;}) => {
                 </div>
                 <div className="space-y-1.5 text-center w-full">
                     <span className="text-xs font-medium block whitespace-normal">
-                            Add Website
+                            Manual Text
                     </span>
                     <p className="text-xs text-zinc-500 font-normal leading-relaxed whitespace-normal wrap-break-word">
                         Manually copy-paste FAQs, internal notes or policies directly into the editor for quick updates

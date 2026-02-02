@@ -6,7 +6,7 @@
 /* -------------------------------
    Theme Variables
 --------------------------------- */
-@theme *inline* {
+@theme inline {
   --font-sans: var(--font-inter);
 
   /* Colors */
