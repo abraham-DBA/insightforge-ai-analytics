@@ -67,7 +67,15 @@ export async function POST(req: NextRequest) {
                 );
             }
 
-        if(type === "website"){
+        if (type === "upload") {
+
+                return NextResponse.json(
+                { error: "Upload type requires multipart/form-data" },
+                { status: 400 }
+                );
+            }
+
+            if(type === "website"){
             if (!body.url) {
                 return NextResponse.json(
                     { error: "URL is required for website type" },
@@ -87,11 +95,6 @@ export async function POST(req: NextRequest) {
             zenUrl.searchParams.set("url", body.url);
             zenUrl.searchParams.set("response_type", "markdown");
 
-            const res = await fetch(zenUrl.toString(), {
-                headers: {
-                    "User-Agent": "InsightForgebot/1.0"
-                }
-            });
             const controller = new AbortController();
             const timeout = setTimeout(() => controller.abort(), 15_000);
             try {
