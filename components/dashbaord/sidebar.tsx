@@ -1,18 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import {
-    BookOpen,
-    Bot,
-    Layers,
-    LayoutDashboard,
-    MessageSquare,
-    Settings,
-} from "lucide-react";
-import { usePathname } from "next/dist/client/components/navigation";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { useUser } from "@/hooks/useUser";
+import { usePathname } from "next/navigation";
+import {
+    LayoutDashboard, Settings, BookOpen, Layers, Bot, MessageSquare,
+} from "lucide-react";
+import {cn} from "@/lib/utils";
+import {useUser} from "@/hooks/useUser";
+import {useEffect, useState} from "react";
 
 const SIDEBAR_ITEMS = [
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -23,7 +18,7 @@ const SIDEBAR_ITEMS = [
     { label: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
-const Sidebar = () => {
+export default function Sidebar() {
     const pathname = usePathname();
     const { email } = useUser();
     const [metadata, setMetadata] = useState<any>();
@@ -40,7 +35,7 @@ const Sidebar = () => {
     }, []);
 
     return (
-        <div className="w-64 h-screen fixed top-0 left-0 z-40 hidden md:flex flex-col bg-[#050509] border-r border-white/5 relative">
+        <aside className="w-64 bg-[#050509] border-r hidden md:flex flex-col">
             {/* Logo */}
             <div className="h-16 flex items-center px-6 border-b border-white/5">
                 <div className="flex items-center gap-2">
@@ -87,17 +82,15 @@ const Sidebar = () => {
                     <div className="flex flex-col overflow-hidden">
             <span className="text-sm font-medium text-zinc-300 truncate group-hover:text-white">
               {isLoading
-            ? "Loading..."
+                  ? "Loading..."
                   : metadata?.business_name
-                     ? `${metadata.business_name}'s Workspace`
-                : "Workspace"}
+                      ? `${metadata.business_name}'s Workspace`
+                      : "Workspace"}
             </span>
                         <span className="text-xs text-zinc-400 truncate">{email}</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </aside>
     );
-};
-
-export default Sidebar;
+}

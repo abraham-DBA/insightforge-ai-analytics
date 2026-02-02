@@ -1,7 +1,7 @@
 "use client";
 
 import React, {useEffect, useState} from 'react';
-import InitialForm from "@/components/dashboard/initialForm";
+import InitialForm from "@/components/dashbaord/initialForm";
 
 const Page = () => {
     const [isMetaDataAvailable, setIsMetaDataAvailable] = useState(false);
@@ -14,12 +14,12 @@ const Page = () => {
                 if (!response.ok) {
                     setIsMetaDataAvailable(false);
                     return;
-                    }
+                }
                 const data = await response.json();
                 setIsMetaDataAvailable(Boolean(data?.exists));
-                } catch {
+            } catch {
                 setIsMetaDataAvailable(false);
-                } finally {
+            } finally {
                 setIsLoading(false);
             }
         };
