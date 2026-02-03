@@ -107,7 +107,7 @@ const KnowledgeTable = ({sources, onSourceClick, isLoading} : knowledgeTableProp
                         ) : sources.length > 0 ? (
                             sources.map((source, index) =>
                                 <TableRow
-                                    key={index}
+                                    key={source.id}
                                     className="border-white/5 hover:bg-white/5 cursor-pointer group transition-colors"
                                     onClick={() => onSourceClick(source)}
                                 >
