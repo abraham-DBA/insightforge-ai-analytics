@@ -6,6 +6,7 @@ import {PlusIcon} from "lucide-react";
 import QuickActions from "@/components/dashbaord/knowledge/quickActions";
 import AddKnowledgeModal from "@/components/dashbaord/knowledge/addKnowledgeModal";
 import KnowledgeTable from "@/components/dashbaord/knowledge/knowledgeTable";
+import SourceDetailsSheet from "@/components/dashbaord/knowledge/sourceDetailsSheet";
 
 const Page = () => {
     const [defaultTab, setDefaultTab] = React.useState("website");
@@ -125,6 +126,12 @@ const Page = () => {
                 onImport={handleImportSource}
                 isLoading={knowledgeStoringLoader}
                 existingSources={knowledgeSources}
+            />
+
+            <SourceDetailsSheet
+                isOpen={isSheetOpen}
+                setIsOpen={setIsSheetOpen}
+                selectedSource={selectedSource}
             />
 
         </div>
