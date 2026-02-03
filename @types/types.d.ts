@@ -4,12 +4,12 @@ type SourceStatus = "active" | "training" | "error" | "excluded";
 interface KnowledgeSource {
     id: string;
     user_email: string,
-    type: string,
+    type: SourceType,
     name: string;
     status: string;
     source_url: string | null;
     content: string | null;
-    meta_data: string | null;
-    createdAt: string | null;
-    updatedAt: string | null
+    metadata: string | null;
+    last_updated_at: string | null;
+    created_at: string | null;
 }

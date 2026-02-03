@@ -1,10 +1,11 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button} from "@/components/ui/button";
 import {PlusIcon} from "lucide-react";
 import QuickActions from "@/components/dashbaord/knowledge/quickActions";
 import AddKnowledgeModal from "@/components/dashbaord/knowledge/addKnowledgeModal";
+import KnowledgeTable from "@/components/dashbaord/knowledge/knowledgeTable";
 
 const Page = () => {
     const [defaultTab, setDefaultTab] = React.useState("website");
@@ -12,11 +13,31 @@ const Page = () => {
     const [knowledgeStoringLoader, setKnowledgeStoringLoader] = React.useState(false);
     const [knowledgeSourcesLoader, setKnowledgeSourcesLoader] = React.useState(true);
     const [knowledgeSources, setKnowledgeSources] = React.useState<KnowledgeSource[]>([]);
+    const [selectedSource, setSelectedSource] = React.useState<KnowledgeSource | null>(null);
+    const [isSheetOpen, setIsSheetOpen] = React.useState(false);
 
     const openModal = (tab: string) => {
         setDefaultTab(tab);
         setIsAddOpen(true);
     }
+
+    useEffect(() => {
+        const fetchKnowledgeSources = async () => {
+            try {
+                const res = await fetch("/api/knowledge/fetch");
+                if (!res.ok) {
+                    throw new Error("Failed to fetch knowledge sources");
+                }
+                const data = await res.json();
+                setKnowledgeSources(data.sources || []);
+            } catch (error) {
+                console.error("Error fetching knowledge sources:", error);
+            } finally {
+                setKnowledgeSourcesLoader(false);
+            }
+        };
+        fetchKnowledgeSources()
+    }, [])
 
     const handleImportSource = async (data: any) => {
         setKnowledgeStoringLoader(true);
@@ -56,6 +77,11 @@ const Page = () => {
             setKnowledgeStoringLoader(false);
         }
     }
+
+    const handleSourceClick = (source: KnowledgeSource) => {
+        setSelectedSource(source);
+        setIsSheetOpen(true);
+    }
     return (
         <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -83,6 +109,13 @@ const Page = () => {
 
             {/*Quick actions */}
             <QuickActions onOpenModal={openModal}/>
+
+            <KnowledgeTable
+                sources = {knowledgeSources}
+                onSourceClick = {handleSourceClick}
+                isLoading = {knowledgeSourcesLoader}
+
+            />
 
             <AddKnowledgeModal
                 isOpen={isAddOpen}
