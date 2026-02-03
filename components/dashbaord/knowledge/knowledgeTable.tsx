@@ -38,9 +38,8 @@ const KnowledgeTable = ({sources, onSourceClick, isLoading} : knowledgeTableProp
                     </CardTitle>
                     <div className="flex items-center gap-2">
                         <div className="relative">
-                            {/*<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 pointer-events-none" />*/}
                             <Input
-                                className="pl-9 h-9 w-52 md:w-72 bg-white/5 border-white/10 text-sm"
+                                className="h-9 w-52 md:w-72 bg-white/5 border-white/10 text-sm"
                                 placeholder="Search Sources..."
                             />
                         </div>
@@ -82,7 +81,7 @@ const KnowledgeTable = ({sources, onSourceClick, isLoading} : knowledgeTableProp
                             Array.from({ length: 5 }).map((_, i) => (
                                 <TableRow
                                     key={i}
-                                    className="border-white/5 hover:bg-white/2 hover:text-white/4"
+                                    className="border-white/5 hover:bg-white/5"
                                 >
                                     <TableCell className="py-4">
                                         <Skeleton className="h-5 w-32 bg-white/5 " />
@@ -109,7 +108,7 @@ const KnowledgeTable = ({sources, onSourceClick, isLoading} : knowledgeTableProp
                             sources.map((source, index) =>
                                 <TableRow
                                     key={index}
-                                    className="border-white/5 hover:bg-white/2 cursor-pointer group transition-colors"
+                                    className="border-white/5 hover:bg-white/5 cursor-pointer group transition-colors"
                                     onClick={() => onSourceClick(source)}
                                 >
                                     <TableCell className="font-medium text-zinc-200 py-3 px-3 group-hover:text-white">
