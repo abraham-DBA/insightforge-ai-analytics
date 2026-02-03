@@ -8,15 +8,18 @@ import {
     SheetFooter,
     SheetHeader,
     SheetTitle,
+
 } from "@/components/ui/sheet"
 import { getTypeIcon } from "@/components/dashbaord/knowledge/knowledgeTable"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { KnowledgeSource } from "@/types/knowledge"
 
 interface SourceDetailsSheetProps {
     isOpen: boolean
     setIsOpen: (open: boolean) => void
     selectedSource: KnowledgeSource | null
+    onDisconnect?: (sourceId: string) => void
 }
 
 const SourceDetailsSheet = ({
@@ -86,6 +89,7 @@ const SourceDetailsSheet = ({
                     <Button
                         variant="destructive"
                         className="w-full bg-red-500/20 text-red-400 hover:bg-red-500/40 hover:text-red-200 transition-colors duration-200"
+                        onClick={() => onDisconnect?.(selectedSource.id)}
                     >
                         Disconnect Source
                     </Button>
