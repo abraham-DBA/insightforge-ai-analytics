@@ -13,7 +13,7 @@ interface knowledgeTableProps {
     isLoading: boolean
 }
 
-const getTypeIcon = (type: SourceType) => {
+export const getTypeIcon = (type: SourceType) => {
     switch (type) {
         case "website":
             return <Globe className="w-4 h-4 text-blue-400" />
