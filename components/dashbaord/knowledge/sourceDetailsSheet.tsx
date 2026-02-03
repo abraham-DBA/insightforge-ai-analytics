@@ -56,10 +56,10 @@ const SourceDetailsSheet = ({
                             {selectedSource.status}
                         </Badge>
                         <span className="text-xs text-zinc-500">
-              Updated{" "}
-                            {selectedSource.last_updated_at &&
-                                new Date(selectedSource.last_updated_at).toLocaleDateString()}
-            </span>
+              {selectedSource.last_updated_at
+              ? `Updated ${new Date(selectedSource.last_updated_at).toLocaleDateString()}`
+                  : "Never updated"}
+                           </span>
                     </div>
                 </SheetHeader>
 
