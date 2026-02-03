@@ -9,7 +9,7 @@ interface KnowledgeSource {
     status: string;
     source_url: string | null;
     content: string | null;
-    meta_data: string | null;
-    createdAt: string | null;
-    updatedAt: string | null
+    metadata: string | null;
+    last_updated_at: string | null;
+    created_at: string | null;
 }
