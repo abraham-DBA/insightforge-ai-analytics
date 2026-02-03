@@ -26,6 +26,7 @@ const SourceDetailsSheet = ({
                                 isOpen,
                                 setIsOpen,
                                 selectedSource,
+                                onDisconnect,
                             }: SourceDetailsSheetProps) => {
     if (!selectedSource) return null
 
