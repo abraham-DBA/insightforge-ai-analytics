@@ -13,7 +13,6 @@ import {
 import { getTypeIcon } from "@/components/dashbaord/knowledge/knowledgeTable"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { KnowledgeSource } from "@/types/knowledge"
 
 interface SourceDetailsSheetProps {
     isOpen: boolean
