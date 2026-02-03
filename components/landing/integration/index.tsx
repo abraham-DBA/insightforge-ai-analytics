@@ -56,13 +56,13 @@ const Integration = () => {
                                 <div className="pl-4">
                                     <span className="text-indigo-400">src</span>
                                     <span className="text-emerald-400">
-                                        &quot;https://cdn.insightforge.com/init.js&quot;
+                                        &quot;https://insightforge.com/init.js&quot;
                                     </span>
                                 </div>
                                 <div className="pl-4">
                                     <span className="text-indigo-400">data-url</span>
                                     <span className="text-emerald-400">
-                                        &quot;https://docs.google.com/document/d/1234567890/edit&quot;
+                                        &quot;https://docs.google.com/edit&quot;
                                     </span>
                                     <br/>
                                     <span className="text-indigo-400">defer&gt;</span>
