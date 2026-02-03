@@ -114,7 +114,7 @@ const KnowledgeTable = ({sources, onSourceClick, isLoading} : knowledgeTableProp
                                     <TableCell className="font-medium text-zinc-200 py-3 px-3 group-hover:text-white">
                                         <div className="flex items-center gap-3">
                                             <div className="shrink-0">
-                                                {getTypeIcon(source.type as SourceType)}
+                                                {getTypeIcon(source.type)}
                                             </div>
                                             <div className="flex flex-col">
                                                 <span>{source.name}</span>

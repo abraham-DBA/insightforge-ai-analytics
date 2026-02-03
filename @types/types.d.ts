@@ -4,7 +4,7 @@ type SourceStatus = "active" | "training" | "error" | "excluded";
 interface KnowledgeSource {
     id: string;
     user_email: string,
-    type: string,
+    type: SourceType,
     name: string;
     status: string;
     source_url: string | null;
