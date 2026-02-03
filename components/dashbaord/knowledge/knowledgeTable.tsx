@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {File, Filter, Globe, Search, Upload} from "lucide-react";
+import {File, FileText, Filter, Globe, Search, Upload} from "lucide-react";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
@@ -20,6 +20,10 @@ const getTypeIcon = (type: SourceType) => {
         case "upload":
             return <Upload className="w-4 h-4 text-emerald-400" />
         case "text":
+            return <File className="w-4 h-4 text-zinc-400" />
+        case "docs":
+            return <FileText className="w-4 h-4 text-sky-400" />
+                default:
             return <File className="w-4 h-4 text-zinc-400" />
     }
 }
