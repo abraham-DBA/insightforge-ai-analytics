@@ -5,7 +5,7 @@ const SocialProof = () => {
         <section className="py-12 border-y border-white/5 bg-black/20">
             <div className="max-w-6xl mx-auto px-6 text-center">
                 <p className="text-xs font-medium text-zinc-600 uppercase tracking-widest mb-8">
-                    Trusted by data-driven teams
+                    Trusted by data-driven teams.
                 </p>
                 <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale">
                     <span className="text-lg font-bold tracking-tight text-white">
