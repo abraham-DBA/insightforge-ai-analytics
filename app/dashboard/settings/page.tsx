@@ -91,6 +91,7 @@ const SettingsPage = () => {
                         </div>
                     </CardContent>
                 </CardHeader>
+
             </Card>
             <TeamSection />
         </div>

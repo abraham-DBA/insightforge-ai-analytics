@@ -1,11 +1,14 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Plus } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import { Label } from '@/components/ui/label';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 interface TeamMember {
     id: string;
@@ -150,9 +153,67 @@ const TeamSection = () => {
               </DialogFooter>
             </div>
           </DialogContent>
-
         </Dialog>
       </CardHeader>
+      <CardContent>
+        <div className='space-y-4'>
+          {
+            isLoading ? (
+              <div className="text-center py-4 text-zinc-500 text-sm">
+                Loading Team
+              </div>
+            ) : team.length === 0 ? (
+              <div className='text-center py-4 text-zinc-500 text-sm'>
+                No Team members
+              </div>
+            ) : (
+              <div className='grid gap-4'>
+                {team.map((member) => (
+                  <div key={member.id} className='flex items-center justify-between p-3 rounded-lg border border-white/5 bg-white/1 hover:bg-white/2 transition-colors'>
+                    <div className='flex items-center gap-3'> 
+                      <Avatar className='w-9 h-9 border border-white/10'>
+                        <AvatarFallback className='bg-zinc-800 text-zinc-400'>
+                          {member.name.slice(0,2).toUpperCase() || "UN"}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                    <div className='flex items-center gap-2'>
+                      <p className='text-sm font-medium text-white'>
+                        {member.name || "Unknown"}
+                      </p>
+                      <Badge
+                        variant="secondary"
+                        className={cn(
+                          "capitalize border mx-1 mb-1",
+                          member.status === "active"
+                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20"
+                          : "border-yellow-500/10 text-yellow-400 border-yellow-500/20 hover:bg-yellow-500/20"
+                        )}
+                      >
+                        {member.status}
+                      </Badge>
+                    </div>
+                    <p className='text-xs text-zinc-500'>
+                      {member.user_email}
+                    </p>
+                    </div>
+                  </div>
+                  <div className='flex items-center gap-2'>
+                    <Badge 
+                    variant="secondary"
+                    className='bg-white/5 capitalize text-zinc-400 hover:bg-white/10 border-white/5 mx-1'
+                    >
+                      {member.role}
+                    </Badge>
+                  </div>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </CardContent>
+      
     </Card>
   )
 }
