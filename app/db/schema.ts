@@ -65,3 +65,13 @@ export const chatBotMetaData = pgTable("chatBotMetaData", {
     .default("Hi! I'm your AI assistant. Which area would you like to explore today?"),
     created_at: text("created_at").default(sql`now()`),
 })
+
+export const teamMembers = pgTable("team_members", {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    user_email: text("user_email").notNull(),
+    name: text("name").notNull(),
+    organizational_id: text("organizational_id").notNull(),
+    role: text("role").notNull().default("member"),
+    status: text("status").notNull().default("pending"),
+    created_at: text("created_at").default(sql`now()`),
+})

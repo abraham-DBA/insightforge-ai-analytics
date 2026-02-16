@@ -1,36 +1,36 @@
-import {isAuthorized} from "@/lib/isAuthorized";
-import {NextResponse} from "next/server";
-import {cookies} from "next/headers";
-import {db} from "@/app/db/client";
-import {metadata} from "@/app/db/schema"; // Import the table schema, not metadata from layout
-import {eq} from "drizzle-orm";
+import { isAuthorized } from "@/lib/isAuthorized";
+import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { db } from "@/app/db/client";
+import { metadata } from "@/app/db/schema"; // Import the table schema, not metadata from layout
+import { eq } from "drizzle-orm";
 
 export async function GET(request: Request) {
-    try{
+    try {
         const user = await isAuthorized();
 
-        if(!user) {
+        if (!user) {
             return NextResponse.json(
-                {error: "Unauthorized"},
-                {status: 401}
+                { error: "Unauthorized" },
+                { status: 401 }
             )
         }
 
         const cookieStore = await cookies()
         const metaDataCookie = cookieStore.get("metadata")
 
-        if(metaDataCookie?.value) {
+        if (metaDataCookie?.value) {
             try {
                 const parsedData = JSON.parse(metaDataCookie.value);
-            return NextResponse.json(
-                {
-                    exists: true,
-                    source: "cookie",
-                    data: parsedData,
-                },
-                {status: 200}
-            );
-                } catch {
+                return NextResponse.json(
+                    {
+                        exists: true,
+                        source: "cookie",
+                        data: parsedData,
+                    },
+                    { status: 200 }
+                );
+            } catch {
                 // Invalid cookie data, fall through to database query
             }
         }
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
             .from(metadata)
             .where(eq(metadata.user_email, user.email));
 
-        if(record) {
+        if (record) {
             cookieStore.set(
                 "metadata",
                 JSON.stringify(record),
@@ -58,7 +58,7 @@ export async function GET(request: Request) {
                     source: "database",
                     data: record,
                 },
-                {status: 200}
+                { status: 200 }
             )
         }
 
@@ -75,8 +75,8 @@ export async function GET(request: Request) {
     } catch (e) {
         console.error("Metadata fetch error", e);
         return NextResponse.json(
-            {error: "Internal server error"},
-            {status: 500}
+            { error: "Internal server error" },
+            { status: 500 }
         )
 
     }
