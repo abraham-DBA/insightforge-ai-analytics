@@ -23,21 +23,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} bg-[#050509] min-h-screen flex flex-col p-0 antialiased text-zinc-100 selection:bg-zinc-800 font-sans`}
       >
-      <div className="fixed inset-0 -z-20 pointer-events-none">
-          <div className="w-full h-full opacity-20">
-              <div data-us-project="NMlvqnkICwYYJ6lYb064" className="absolute w-full h-full left-0 top-0" />
-          </div>
-          <div className="absolute inset-0 bg-linear-to-t from-[#050509] via-transparent to-transparent opacity-80" />
+      <div className="fixed inset-0 -z-50 pointer-events-none bg-[#050509]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.08)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.03)_0%,transparent_40%)]" />
       </div>
         {children}
-      <Script
-          id = "unicorn studio"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-              __html: `!function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();`
-          }}
-
-      />
       </body>
     </html>
   );

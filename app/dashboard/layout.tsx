@@ -20,10 +20,10 @@ export default async function DashboardLayout({
     const metaDataCookie = cookieStore.get("metadata");
 
     return (
-        <div className="bg-[#050509] font-sans min-h-screen antialiased selection:bg-zinc-800 flex">
+        <div className="bg-[#050509] font-sans h-screen antialiased selection:bg-zinc-800 flex overflow-hidden">
             {metaDataCookie?.value ? <>
             <Sidebar />
-                <div className="flex-1 flex flex-col md:ml-64 relative min-h-screen transition-all duration-300">
+                <div className="flex-1 flex flex-col md:ml-64 relative h-screen overflow-y-auto transition-[margin] duration-200 ease-in-out will-change-[margin]">
                     <main className="flex-1">
                         {children}
                     </main>

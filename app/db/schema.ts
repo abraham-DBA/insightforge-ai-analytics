@@ -41,3 +41,27 @@ export const knowledge_source = pgTable("knowledge_source", {
     last_updated_at: text("last_updated_at").default(sql`now()`),
     created_at: text("created_at").default(sql`now()`),
 })
+
+export const sections = pgTable("sections", {
+    id: text("id")
+        .primaryKey()
+        .default(sql`gen_random_uuid()`),
+    user_email: text("user_email").notNull(),
+    name: text("name").notNull(),
+    description: text("description").notNull(),
+    tone: text("tone").notNull(),
+    allowed_topics: text("allowed_topics"),
+    blocked_topics: text("blocked_topics"),
+    source_ids: text("source_ids").array().notNull(),
+    status: text("status").notNull().default("active"),
+    created_at: text("created_at").default(sql`now()`),
+})
+
+export const chatBotMetaData = pgTable("chatBotMetaData", {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    user_email: text("user_email").notNull(),
+    color: text("color").default("#4f39f6"),
+    welcome_message: text("welcome_message")
+    .default("Hi! I'm your AI assistant. Which area would you like to explore today?"),
+    created_at: text("created_at").default(sql`now()`),
+})

@@ -153,7 +153,7 @@ const KnowledgeTable = ({sources, onSourceClick, isLoading} : knowledgeTableProp
                             )
 
                         ) : (
-                            <TableRow>
+                            <TableRow className="hover:bg-transparent">
                                 <TableCell
                                     colSpan={5}
                                     className="h-32 text-center text-zinc-500"

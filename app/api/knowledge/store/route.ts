@@ -1,8 +1,8 @@
-import {NextRequest, NextResponse} from "next/server";
-import {isAuthorized} from "@/lib/isAuthorized";
-import {summarizeMarkdown} from "@/lib/openai";
-import {db} from "@/app/db/client";
-import {knowledge_source} from "@/app/db/schema";
+import { NextRequest, NextResponse } from "next/server";
+import { isAuthorized } from "@/lib/isAuthorized";
+import { summarizeMarkdown } from "@/lib/openai";
+import { db } from "@/app/db/client";
+import { knowledge_source } from "@/app/db/schema";
 
 export async function POST(req: NextRequest) {
     try {
@@ -51,8 +51,8 @@ export async function POST(req: NextRequest) {
                     })
                 });
                 return NextResponse.json(
-                    {message: "CSV file uploaded successfully"},
-                    {status: 200}
+                    { message: "CSV file uploaded successfully" },
+                    { status: 200 }
                 )
             }
         } else {
@@ -64,24 +64,24 @@ export async function POST(req: NextRequest) {
             return NextResponse.json(
                 { error: "Invalid type. Must be 'upload', 'website', or 'text'" },
                 { status: 400 }
-                );
-            }
+            );
+        }
 
         if (type === "upload") {
 
-                return NextResponse.json(
+            return NextResponse.json(
                 { error: "Upload type requires multipart/form-data" },
                 { status: 400 }
-                );
-            }
+            );
+        }
 
-            if(type === "website"){
+        if (type === "website") {
             if (!body.url) {
                 return NextResponse.json(
                     { error: "URL is required for website type" },
                     { status: 400 }
-                    );
-                }
+                );
+            }
             const zenUrl = new URL("https://api.zenrows.com/v1/");
             const apiKey = process.env.ZENROWS_API_KEY;
             if (!apiKey) {
@@ -89,8 +89,8 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json(
                     { error: "Internal Server Error" },
                     { status: 500 }
-                    );
-                }
+                );
+            }
             zenUrl.searchParams.set("apikey", apiKey);
             zenUrl.searchParams.set("url", body.url);
             zenUrl.searchParams.set("response_type", "markdown");
@@ -100,48 +100,48 @@ export async function POST(req: NextRequest) {
             try {
                 const res = await fetch(zenUrl.toString(), {
                     headers: {
-                    "User-Agent": "InsightForgebot/1.0"
+                        "User-Agent": "InsightForgebot/1.0"
                     },
-                signal: controller.signal
+                    signal: controller.signal
                 });
                 const html = await res.text();
 
-                    if(!res.ok){
+                if (!res.ok) {
                     return NextResponse.json(
                         {
-                        error: "Zenrows request failed",
-                        status: res.status,
-                        body: html.slice(0, 500)
+                            error: "Zenrows request failed",
+                            status: res.status,
+                            body: html.slice(0, 500)
 
-                    },
-                    {status: 502}
+                        },
+                        { status: 502 }
                     )
-                    }
+                }
 
-                    const markdown = await summarizeMarkdown(html);
+                const markdown = await summarizeMarkdown(html);
 
-                    await db.insert(knowledge_source).values({
-                        user_email: user.email,
+                await db.insert(knowledge_source).values({
+                    user_email: user.email,
                     type: "website",
                     name: body.url,
                     status: "active",
                     source_url: body.url,
                     content: markdown,
-                    })
-                } finally {
+                })
+            } finally {
                 clearTimeout(timeout);
-                }
+            }
 
-        } else if(type === "text") {
+        } else if (type === "text") {
             if (!body.content || !body.title) {
                 return NextResponse.json(
                     { error: "Content and title are required for text type" },
                     { status: 400 }
-                    );
-                }
+                );
+            }
             let content = body.content;
 
-            if(body.content.length > 500) {
+            if (body.content.length > 500) {
                 const markdown = await summarizeMarkdown(body.content);
                 content = markdown;
             }
@@ -155,14 +155,14 @@ export async function POST(req: NextRequest) {
         }
 
         return NextResponse.json(
-            {message: "Source added successfully"},
-            {status: 200}
+            { message: "Source added successfully" },
+            { status: 200 }
         );
     } catch (error) {
         console.error("Error storing knowledge source:", error);
         return NextResponse.json(
-            {error: "Internal Server Error"},
-            {status: 500}
+            { error: "Internal Server Error" },
+            { status: 500 }
         )
     }
 }
