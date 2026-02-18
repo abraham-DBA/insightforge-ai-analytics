@@ -2,7 +2,7 @@
 
 import { AlertCircle, Bot, ChevronDown, MessageCircle, Send, X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, Suspense } from 'react'
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
@@ -22,7 +22,7 @@ interface Section {
     source_ids: string[];
 }
 
-const EmbedPage = () => {
+const ChatWidgetContent = () => {
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
 
@@ -369,6 +369,14 @@ const EmbedPage = () => {
                 </div>
             </div>
   )
+}
+
+const EmbedPage = () => {
+    return (
+        <Suspense fallback={null}>
+            <ChatWidgetContent />
+        </Suspense>
+    )
 }
 
 export default EmbedPage
