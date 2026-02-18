@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 const EmbedCodeConfig = ({ chatbotId }: { chatbotId?: string }) => {
   const [copied, setCopied] = useState(false);
 
-  const embedCode = `<script src="https://insightforge.com/widget.js" data-id="${chatbotId}" defer></script>`;
+  const embedCode = `<script src="http://localhost:3000/widget.js" data-id="${chatbotId}" defer></script>`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(embedCode);

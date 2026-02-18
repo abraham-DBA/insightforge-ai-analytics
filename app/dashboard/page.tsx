@@ -2,6 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import InitialForm from "@/components/dashbaord/initialForm";
+import DashboardOverview from "@/components/dashbaord/dashboardOverview";
 
 const Page = () => {
     const [isMetaDataAvailable, setIsMetaDataAvailable] = useState(false);
@@ -35,8 +36,7 @@ const Page = () => {
                     <InitialForm />
                 </div>
             ) : (
-                <>
-                </>
+                <DashboardOverview />
             )}
         </div>
     );

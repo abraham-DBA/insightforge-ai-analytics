@@ -4,6 +4,9 @@ import TeamSection from '@/components/dashbaord/settings/teamSection';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { useEffect, useState } from 'react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Trash2 } from 'lucide-react';
 
 interface organizationData {
     id: string;
@@ -94,6 +97,59 @@ const SettingsPage = () => {
 
             </Card>
             <TeamSection />
+
+            <Card className='border-red-500/10 bg-red-500/2'>
+                <CardHeader>
+                    <CardTitle className='text-base font-medium text-red-500'>
+                        Danger Zone
+                    </CardTitle>
+                    <CardDescription className='text-red-500/60'>
+                        Irreversible actions for this workspace
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className='flex items-center justify-between'>
+                        <div className='space-y-0.5'>
+                            <p className='text-sm font-medium text-zinc-300'>Delete Workspace</p>
+                            <p className='text-xs text-zinc-500'>Permanently delete all knowledge, conversations, and settings.</p>
+                        </div>
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Button
+                                    variant="destructive"
+                                    className='bg-red-500/10 text-red-500 hover:bg-red-500/20 border-red-500/20 shadow-none'
+                                >
+                                    <Trash2 className='h-4 w-4 mr-2'/>
+                                    Delete Workspace
+                                </Button>
+                            </AlertDialogTrigger>
+
+                            <AlertDialogContent className='bg-[#0e0e12] border-white/10'>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle className='text-white'>
+                                            Are you absolutely sure?
+                                        </AlertDialogTitle>
+                                        <AlertDialogDescription className='text-zinc-400'>
+                                            This action cannot be undone. This will permanently delete your workspace
+                                            and all of its data.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel className='border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-white'>
+                                            Cancel
+                                        </AlertDialogCancel>
+                                        <AlertDialogAction className='bg-red-500/10 text-red-500 hover:bg-red-500/20 border-red-500/20'>
+                                            Delete Workspace
+                                        </AlertDialogAction>
+                                    </AlertDialogFooter>
+
+                            </AlertDialogContent>
+                        </AlertDialog>
+                        
+                    </div>
+                </CardContent>
+
+            </Card>
         </div>
     );
 };

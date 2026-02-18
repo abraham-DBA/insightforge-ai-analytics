@@ -180,23 +180,6 @@ const ChatbotPage = () => {
                         Test your chatbot in real-time before you deploy it
                     </p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="bg-white/5 border-white/10 text-zinc-300 hover:bg-white/10"
-                        onClick={() => {/* Toggle Settings or Share */}}
-                    >
-                        Share Playground
-                    </Button>
-                    <Button 
-                        size="sm" 
-                        className="bg-indigo-600 hover:bg-indigo-500 text-white"
-                        onClick={() => {/* Deploy Logic */}}
-                    >
-                        Deploy Chatbot
-                    </Button>
-                </div>
             </div>
 
             <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 h-full min-h-0'>

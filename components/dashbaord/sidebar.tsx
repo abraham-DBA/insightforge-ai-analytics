@@ -14,7 +14,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useUser } from "@/hooks/useUser";
 
-const SIDEBAR_ITEMS = [
+export const SIDEBAR_ITEMS = [
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { label: "Knowledge", href: "/dashboard/knowledge", icon: BookOpen },
     { label: "Sections", href: "/dashboard/sections", icon: Layers },
