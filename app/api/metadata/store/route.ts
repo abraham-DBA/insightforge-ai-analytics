@@ -44,10 +44,16 @@ export async function POST(req: NextRequest) {
             { metadataResponse },
             { status: 201 }
         )
-    } catch (error) {
+    } catch (error: any) {
         console.error("Metadata store error:", error);
         return NextResponse.json(
-            { error: "Internal Server Error", details: error instanceof Error ? error.message : String(error) },
+            {
+                error: "Internal Server Error",
+                message: error.message,
+                code: error.code,
+                detail: error.detail,
+                hint: error.hint
+            },
             { status: 500 }
         );
     }
