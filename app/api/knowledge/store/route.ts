@@ -107,14 +107,15 @@ export async function POST(req: NextRequest) {
                 const html = await res.text();
 
                 if (!res.ok) {
-                    return NextResponse.json(
-                        {
-                            error: "Zenrows request failed",
-                            status: res.status,
-                            body: html.slice(0, 500)
+                    let errorMessage = "ZenRows request failed";
+                    try {
+                        const errorJson = JSON.parse(html);
+                        if (errorJson.detail) errorMessage = `ZenRows: ${errorJson.detail}`;
+                    } catch (e) { }
 
-                        },
-                        { status: 502 }
+                    return NextResponse.json(
+                        { error: errorMessage },
+                        { status: 400 }
                     )
                 }
 

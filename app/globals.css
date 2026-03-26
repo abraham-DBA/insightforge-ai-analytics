@@ -7,7 +7,7 @@
    Theme Variables
 --------------------------------- */
 @theme inline {
-  --font-sans: var(--font-inter);
+  --font-sans: 'Inter', sans-serif;
 
   /* Colors */
   --color-background: var(--background);
