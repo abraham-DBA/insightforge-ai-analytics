@@ -114,20 +114,20 @@ const AddKnowledgeModal = ({isOpen, setIsOpen, defaultTab, setDefaultTab, onImpo
                         <TabsList className="bg-transparent h-auto p-0 gap-6">
                             <TabsTrigger
                                 value={"website"}
-                                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-500 rounded-none px-0 py-3 text-xs uppercase tracking-wider text-zinc-500 data-[state=active]:text-white transition-all focus-visible:ring-0 focus:outline-none border-t-0 border-x-0">
+                                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-500 rounded-none px-0 py-3 text-xs uppercase tracking-wider text-zinc-500 hover:text-white data-[state=active]:text-white transition-all focus-visible:ring-0 focus:outline-none border-t-0 border-x-0">
                                 Website
                             </TabsTrigger>
 
                             <TabsTrigger
                                 value="text"
-                                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-500 rounded-none px-0 py-3 text-xs uppercase tracking-wider text-zinc-500 data-[state=active]:text-white transition-all focus-visible:ring-0 focus:outline-none border-t-0 border-x-0"
+                                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-500 rounded-none px-0 py-3 text-xs uppercase tracking-wider text-zinc-500 hover:text-white data-[state=active]:text-white transition-all focus-visible:ring-0 focus:outline-none border-t-0 border-x-0"
                             >
                                 Q&A/ Text
                             </TabsTrigger>
 
                             <TabsTrigger
                                 value="upload"
-                                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-500 rounded-none px-0 py-3 text-xs uppercase tracking-wider text-zinc-500 data-[state=active]:text-white transition-all focus-visible:ring-0 focus:outline-none border-t-0 border-x-0"
+                                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-500 rounded-none px-0 py-3 text-xs uppercase tracking-wider text-zinc-500 hover:text-white data-[state=active]:text-white transition-all focus-visible:ring-0 focus:outline-none border-t-0 border-x-0"
                             >
                                 File Upload
                             </TabsTrigger>

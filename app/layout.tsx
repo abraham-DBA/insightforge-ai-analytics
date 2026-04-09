@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/dist/client/script";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "InsightForge",
@@ -27,6 +28,7 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.03)_0%,transparent_40%)]" />
       </div>
         {children}
+        <Toaster theme="dark" position="top-right" />
       </body>
     </html>
   );

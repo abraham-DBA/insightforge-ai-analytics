@@ -150,6 +150,7 @@ const Page = () => {
 
         if(!response.ok){
             toast.error("Failed to create section")
+            return;
         }
 
         await fetchSections();
@@ -187,6 +188,7 @@ const Page = () => {
 
             if(!response.ok){
                 toast.error("Failed to delete section")
+                return;
             }
 
             await fetchSections();
