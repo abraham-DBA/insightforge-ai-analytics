@@ -23,6 +23,7 @@ const ChatbotPage = () => {
 
     const [primaryColor, setPrimaryColor] = useState("#4f46e5")
     const [welcomeMessage, setWelcomeMessage] = useState("")
+    const [allowedDomains, setAllowedDomains] = useState<string[]>([])
     const [isSaving, setIsSaving] = useState(false)
 
     useEffect(() => {
@@ -37,6 +38,7 @@ const ChatbotPage = () => {
                 setPrimaryColor(metaData.color || "#4f46e5");
                 const msg = metaData.welcome_message || "Hi! I'm your AI assistant. Which area would you like to explore today?";
                 setWelcomeMessage(msg);
+                setAllowedDomains(metaData.allowed_domains || []);
                 
                 setMessages([
                   {
@@ -208,6 +210,8 @@ const ChatbotPage = () => {
                   setPrimaryColor={setPrimaryColor}
                   welcomeMessage={welcomeMessage}
                   setWelcomeMessage={setWelcomeMessage}
+                  allowedDomains={allowedDomains}
+                  setAllowedDomains={setAllowedDomains}
                   isSaving={isSaving}
                   setIsSaving={setIsSaving}
                   handleReset={handleReset}

@@ -63,6 +63,7 @@ export const chatBotMetaData = pgTable("chatBotMetaData", {
     color: text("color").default("#4f39f6"),
     welcome_message: text("welcome_message")
     .default("Hi! I'm your AI assistant. Which area would you like to explore today?"),
+    allowed_domains: text("allowed_domains").array(),
     created_at: text("created_at").default(sql`now()`),
 })
 

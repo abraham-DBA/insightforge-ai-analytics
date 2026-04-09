@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const { color, welcome_message } = await req.json();
+        const { color, welcome_message, allowed_domains } = await req.json();
 
         // Check if metadata exists for this user
         const [existingMetaData] = await db
@@ -26,6 +26,7 @@ export async function POST(req: Request) {
                 .set({
                     color: color || existingMetaData.color,
                     welcome_message: welcome_message || existingMetaData.welcome_message,
+                    allowed_domains: allowed_domains !== undefined ? allowed_domains : existingMetaData.allowed_domains,
                 })
                 .where(eq(chatBotMetaData.user_email, user.email || ""))
                 .returning();
@@ -39,6 +40,7 @@ export async function POST(req: Request) {
                     user_email: user.email!,
                     color: color || "#4f39f6",
                     welcome_message: welcome_message || "Hi! I'm your AI assistant. Which area would you like to explore today?",
+                    allowed_domains: allowed_domains || [],
                 })
                 .returning();
 

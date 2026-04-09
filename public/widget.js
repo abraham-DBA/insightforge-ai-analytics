@@ -11,7 +11,18 @@
             return;
         };
 
-        fetch("http://localhost:3000/api/widget/session", {
+        // Dynamically get the base URL from the script src
+        var scriptSrc = script.src;
+        var baseUrl = scriptSrc.substring(0, scriptSrc.lastIndexOf('/'));
+        // If the script is at /widget.js, we want the root
+        if (baseUrl.endsWith('/public')) {
+            baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/'));
+        }
+        
+        // Ensure we handle cases where script is at the root
+        var rootUrl = new URL(scriptSrc).origin;
+
+        fetch(rootUrl + "/api/widget/session", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,7 +39,7 @@
             }
 
             var iframe = document.createElement("iframe");
-            iframe.src = "http://localhost:3000/embed?token=" + encodeURIComponent(data.token);
+            iframe.src = rootUrl + "/embed?token=" + encodeURIComponent(data.token);
             iframe.setAttribute("title", "InsightForge Support Widget");
             iframe.style.position = "fixed"
             iframe.style.bottom = "20px"

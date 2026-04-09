@@ -1,13 +1,20 @@
 
 import { Terminal, Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
 const EmbedCodeConfig = ({ chatbotId }: { chatbotId?: string }) => {
   const [copied, setCopied] = useState(false);
+  const [origin, setOrigin] = useState("http://localhost:3000");
 
-  const embedCode = `<script src="http://localhost:3000/widget.js" data-id="${chatbotId}" defer></script>`;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
+
+  const embedCode = `<script src="${origin}/widget.js" data-id="${chatbotId}" defer></script>`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(embedCode);
